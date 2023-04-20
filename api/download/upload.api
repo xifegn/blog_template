@@ -1,0 +1,13 @@
+syntax = "v1"
+
+type UploadResponse {
+	Code int `json:"code"`
+}
+
+@server (
+	group: download
+)
+service main-api {
+	@handler UploadHandler
+	post /upload returns (UploadResponse)
+}

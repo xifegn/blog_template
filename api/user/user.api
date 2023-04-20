@@ -1,0 +1,71 @@
+syntax = "v1"
+
+import "arrays/arrays.api"
+
+info(
+    title: "go-zero"
+    desc: "Slim Dog"
+    author: "west wind"
+    email: "hahahai@gmail.com"
+    version: "0.0"
+)
+type (
+    RegisterReq {
+        Name     string `json:"name"`
+        Mobile   string `json:"mobile"`
+        Password string `json:"password"`
+    }
+
+    RegisterResp {
+        Id     int64  `json:"id"`
+        Name   string `json:"name"`
+        Mobile string `json:"mobile"`
+    }
+
+    LoginReq {
+        Mobile   string `json:"mobile"`
+        Password string `json:"password"`
+    }
+
+    LoginResp {
+        AccessToken  string `json:"accessToken"`
+        AccessExpire int64  `json:"accessExpire"`
+    }
+
+    UserInfoResp {
+        Id        int64  `json:"id"`
+        Name      string `json:"name"`
+        Avatar    string `json:"avatar"`
+        Collects  Array  `json:"collects"`
+        Following Array  `json:"following"`
+        Fan       int64  `json:"fan"`
+    }
+    DelReq {
+        Id int64 `json:"id"`
+    }
+    DelResp {
+        Code int64 `json:"code"`
+    }
+)
+@server (
+    group: user
+)
+service main-api {
+    @handler Login
+    post /user/login (LoginReq) returns (LoginResp)
+
+    @handler Register
+    post /user/register (RegisterReq) returns (RegisterResp)
+
+    @handler Delete
+    post /user/remove (DelReq) returns (DelResp)
+}
+
+@server (
+    jwt: Auth
+    group: user
+)
+service main-api {
+    @handler UserInfo
+    post /user/userinfo () returns (UserInfoResp)
+}

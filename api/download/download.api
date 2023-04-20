@@ -1,0 +1,14 @@
+syntax = "v1"
+
+type DownloadRequest {
+	File string `path:"file"`
+}
+
+
+@server (
+	group: download
+)
+service main-api {
+	@handler DownloadHandler
+	get /static/:file(DownloadRequest)
+}
