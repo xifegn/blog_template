@@ -3,14 +3,13 @@ package user
 import (
 	"blog_template/common/cryptx"
 	"blog_template/common/jwtx"
+	"blog_template/internal/types"
 	"blog_template/models/user"
 	"context"
 	"google.golang.org/grpc/status"
 	"time"
 
 	"blog_template/internal/svc"
-	"blog_template/internal/types"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -48,6 +47,7 @@ func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err erro
 	}
 
 	return &types.LoginResp{
+		Code:         200,
 		AccessToken:  accessToken,
 		AccessExpire: now + accessExpire,
 	}, nil

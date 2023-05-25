@@ -32,21 +32,26 @@ func NewUploadLogic(r *http.Request, svcCtx *svc.ServiceContext) UploadLogic {
 
 func (l *UploadLogic) Upload() (resp *types.UploadResponse, err error) {
 	l.r.ParseMultipartForm(maxFileSize)
-	file, handler, err := l.r.FormFile("myFile")
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
+	// 在这里添加一句：files := l.r.MultipartForm.File["myFile"]
+	files := l.r.MultipartForm.File["myFile"]
+	// 用一个for循环来遍历files切片
+	for _, fileHeader := range files {
+		file, err := fileHeader.Open()
+		if err != nil {
+			return nil, err
+		}
+		defer file.Close()
 
-	logx.Infof("upload file: %+v, file size: %d, MIME header: %+v",
-		handler.Filename, handler.Size, handler.Header)
+		logx.Infof("upload file: %+v, file size: %d, MIME header: %+v",
+			fileHeader.Filename, fileHeader.Size, fileHeader.Header)
 
-	tempFile, err := os.Create(path.Join(l.svcCtx.Config.Path, handler.Filename))
-	if err != nil {
-		return nil, err
+		tempFile, err := os.Create(path.Join(l.svcCtx.Config.Path, fileHeader.Filename))
+		if err != nil {
+			return nil, err
+		}
+		defer tempFile.Close()
+		io.Copy(tempFile, file)
 	}
-	defer tempFile.Close()
-	io.Copy(tempFile, file)
 
 	return &types.UploadResponse{
 		Code: 0,

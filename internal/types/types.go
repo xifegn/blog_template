@@ -27,6 +27,7 @@ type LoginReq struct {
 }
 
 type LoginResp struct {
+	Code         int64  `json:"code"`
 	AccessToken  string `json:"accessToken"`
 	AccessExpire int64  `json:"accessExpire"`
 }
