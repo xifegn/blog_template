@@ -1,7 +1,7 @@
 syntax = "v1"
 
 type (
-    Array {
-        Array []string `form:"array"`
-    }
+	Array {
+		Array []string `form:"array"`
+	}
 )

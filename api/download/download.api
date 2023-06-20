@@ -4,7 +4,6 @@ type DownloadRequest {
 	File string `path:"file"`
 }
 
-
 @server (
 	group: download
 )
