@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	middleware "github.com/muhfajar/go-zero-cors-middleware"
 
 	"blog_template/internal/config"
 	"blog_template/internal/handler"
@@ -21,18 +20,11 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 
-	ctx := svc.NewServiceContext(c)
-	// Register go-zero-cors-middleware handler to handle preflight request
-	cors := middleware.NewCORSMiddleware(&middleware.Options{})
-
-	// Add run option WithNotAllowedHandler and register `.Handler()` to handle `OPTIONS` request (preflight)
-	server := rest.MustNewServer(c.RestConf,
-		rest.WithNotAllowedHandler(cors.Handler()),
-	)
+	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
+
+	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
-	// Register go-zero-cors-middleware
-	server.Use(cors.Handle)
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
