@@ -1,0 +1,30 @@
+syntax = "v1"
+
+
+type CreateCommentReq {
+    SummaryId string `json:"summaryId"`
+    UserId  string  `json:"userId"`
+    Content string  `json:"content"`
+}
+type CreateCommentResp{
+    Code int64 `json:"code"`
+}
+
+type RemoveCommentReq{
+    SummaryId   string `json:"summaryId"`
+    UserId  string `json:"userId"`
+}
+type RemoveCommentResp{
+    CreateCommentResp
+}
+@server(
+    jwt: Auth
+    group: comment
+)
+service main-api {
+    @handler createComment
+    post /user/createComment (CreateCommentReq) returns (CreateCommentResp)
+
+    @handler removeComment
+    post /user/removeComment (RemoveCommentReq) returns (RemoveCommentResp)
+}

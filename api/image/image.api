@@ -1,0 +1,27 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type CreateImageReq {
+	SummaryId string `json:"summaryId"`
+	Url       string `json:"url"`
+}
+
+type CreateImageResp {
+	Code int64 `json:"code"`
+}
+
+@server(
+	jwt: Auth
+	group: image
+)
+service main-api {
+	@handler createImage
+	post /user/createImage (CreateImageReq) returns (CreateImageResp)
+}

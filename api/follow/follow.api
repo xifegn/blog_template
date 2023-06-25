@@ -1,0 +1,35 @@
+syntax = "v1"
+
+info(
+	title: "a little story"
+	desc: "my fans"
+	author: "west wind's hate'"
+	email: "XXXXXXX"
+	version: "0.0"
+)
+
+type AddFollowReq {
+	FollowerId string `json:"followerId"`
+	FolloweeId string `json:"followeeId"`
+}
+type AddFollowResp {
+	Code int64 `json:"code"`
+}
+type RemoveFollowReq {
+	AddFollowReq
+}
+type RemoveFollowResp {
+	AddFollowResp
+}
+
+@server(
+	jwt: Auth
+	group: follow
+)
+service main-api {
+	@handler addFollow
+	post /user/addFollow (AddFollowReq) returns (AddFollowResp)
+
+	@handler removeFollow
+	post /user/removeFollow (RemoveFollowReq) returns (RemoveFollowResp)
+}

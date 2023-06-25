@@ -1,0 +1,38 @@
+syntax = "v1"
+
+info(
+	title: "heart heart"
+	desc: "S"
+	author: "ikun"
+	email: "hahahai@qq.com"
+	version: "0.0"
+
+)
+
+type AddLikeReq {
+	SummaryId string `json:"summaryId"`
+	UserId    string `json:"userId"`
+}
+
+type AddLikeResp {
+	Code int64 `json:"code"`
+}
+
+type RemoveLikedReq {
+	AddLikeReq
+}
+type RemoveLikedResp {
+	AddLikeResp
+}
+
+@server(
+	jwt: Auth
+	group: like
+)
+service main-api{
+	@handler addLike
+	post /user/addlike (AddLikeReq) returns (AddLikeResp)
+
+	@handler removeLike
+	post /user/removeLike (RemoveLikedReq) returns (RemoveLikedResp)
+}

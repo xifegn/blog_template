@@ -1,0 +1,41 @@
+syntax = "v1"
+
+import "../arrays/arrays.api"
+
+type(
+    CreateSummaryReq{
+        UserId     string `json:"username"`
+        Title   string  `json:"title"`
+        Content Array  `json:"content"`
+        IsShared    bool `json:"isShared"`
+    }
+    CreateSummaryResp{
+        Code int64 `json:"code"`
+    }
+    UpdateSummaryReq{
+        CreateSummaryReq
+    }
+    UpdateSummaryResp{
+        CreateSummaryResp
+    }
+    RemoveSummaryReq{
+        Username    string `json:"username"`
+    }
+    RemoveSummaryResp{
+        CreateSummaryResp
+    }
+)
+@server (
+    jwt: Auth
+    group: summary
+)
+service main-api{
+    @handler createSummary
+    post /user/uploadSummary (CreateSummaryReq) returns (CreateSummaryResp)
+//
+//    @handler updateSummary
+//    post /user/updateSummary (UpdateSummaryReq) returns (UpdateSummaryResp)
+//
+//    @handler removeSummary
+//    post /user/removeSummary (RemoveSummaryReq) returns (RemoveSummaryResp)
+}
