@@ -1,5 +1,5 @@
 # blog_template
-修改handler模板
+修改handler模板,使其返回格式统一
 
     package handler
     import (
