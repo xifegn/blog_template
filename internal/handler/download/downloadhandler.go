@@ -1,12 +1,12 @@
-package handler
+package download
 
 import (
+	"net/http"
+
 	"blog_template/internal/logic/download"
 	"blog_template/internal/svc"
 	"blog_template/internal/types"
-	"blog_template/response"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"net/http"
 )
 
 func DownloadHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
@@ -17,8 +17,12 @@ func DownloadHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := download.NewDownloadLogic(r.Context(), svcCtx)
+		l := download.NewDownloadLogic(r.Context(), svcCtx, w)
 		err := l.Download(&req)
-		response.Response(w, nil, err)
+		if err != nil {
+			httpx.Error(w, err)
+		} else {
+			httpx.Ok(w)
+		}
 	}
 }

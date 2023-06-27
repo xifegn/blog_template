@@ -19,10 +19,11 @@ type AddLikeResp {
 }
 
 type RemoveLikedReq {
-	AddLikeReq
+	SummaryId string `json:"summaryId"`
+	UserId    string `json:"userId"`
 }
 type RemoveLikedResp {
-	AddLikeResp
+	Code int64 `json:"code"`
 }
 
 @server(

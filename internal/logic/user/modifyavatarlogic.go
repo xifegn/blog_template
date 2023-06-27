@@ -1,7 +1,9 @@
 package user
 
 import (
+	"blog_template/models/user"
 	"context"
+	"google.golang.org/grpc/status"
 
 	"blog_template/internal/svc"
 	"blog_template/internal/types"
@@ -22,9 +24,25 @@ func NewModifyAvatarLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Modi
 		svcCtx: svcCtx,
 	}
 }
-
 func (l *ModifyAvatarLogic) ModifyAvatar(req *types.ModifyAvatarReq) (resp *types.ModifyAvatarResp, err error) {
-	// todo: add your logic here and delete this line
+	res, err := l.svcCtx.UserModel.FindOneByUsername(l.ctx, req.Username)
+	if err != nil {
+		return nil, status.Error(500, "")
+	}
 
-	return
+	newUser := user.Users{
+		Id:        res.Id,
+		Username:  res.Username,
+		Password:  res.Password,
+		Email:     res.Email,
+		Avatar:    req.Avatar,
+		Signature: res.Signature,
+		Name:      res.Name,
+	}
+	err = l.svcCtx.UserModel.Update(l.ctx, &newUser)
+	if err != nil {
+		return nil, status.Error(500, "update failed")
+	}
+
+	return &types.ModifyAvatarResp{Code: 200}, nil
 }

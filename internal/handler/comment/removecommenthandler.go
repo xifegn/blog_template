@@ -5,8 +5,9 @@ import (
 	"blog_template/internal/svc"
 	"blog_template/internal/types"
 	"blog_template/response"
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func RemoveCommentHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

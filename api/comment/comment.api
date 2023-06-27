@@ -15,7 +15,7 @@ type RemoveCommentReq{
     UserId  string `json:"userId"`
 }
 type RemoveCommentResp{
-    CreateCommentResp
+    Code int64 `json:"code"`
 }
 @server(
     jwt: Auth

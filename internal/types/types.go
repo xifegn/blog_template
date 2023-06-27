@@ -52,10 +52,11 @@ type DelResp struct {
 
 type ModifyAvatarReq struct {
 	Username string `json:"username"`
+	Avatar   string `json:"avatar"`
 }
 
 type ModifyAvatarResp struct {
-	Avator string `json:"avator"`
+	Code int64 `json:"code"`
 }
 
 type CreateAttachmentReq struct {
@@ -84,7 +85,7 @@ type RemoveCommentReq struct {
 }
 
 type RemoveCommentResp struct {
-	CreateCommentResp
+	Code int64 `json:"code"`
 }
 
 type AddFollowReq struct {
@@ -97,11 +98,12 @@ type AddFollowResp struct {
 }
 
 type RemoveFollowReq struct {
-	AddFollowReq
+	FollowerId string `json:"followerId"`
+	FolloweeId string `json:"followeeId"`
 }
 
 type RemoveFollowResp struct {
-	AddFollowResp
+	Code int64 `json:"code"`
 }
 
 type CreateImageReq struct {
@@ -123,11 +125,12 @@ type AddLikeResp struct {
 }
 
 type RemoveLikedReq struct {
-	AddLikeReq
+	SummaryId string `json:"summaryId"`
+	UserId    string `json:"userId"`
 }
 
 type RemoveLikedResp struct {
-	AddLikeResp
+	Code int64 `json:"code"`
 }
 
 type CreateSummaryReq struct {
@@ -142,11 +145,14 @@ type CreateSummaryResp struct {
 }
 
 type UpdateSummaryReq struct {
-	CreateSummaryReq
+	UserId   string `json:"username"`
+	Title    string `json:"title"`
+	Content  Array  `json:"content"`
+	IsShared bool   `json:"isShared"`
 }
 
 type UpdateSummaryResp struct {
-	CreateSummaryResp
+	Code int64 `json:"code"`
 }
 
 type RemoveSummaryReq struct {
@@ -154,7 +160,7 @@ type RemoveSummaryReq struct {
 }
 
 type RemoveSummaryResp struct {
-	CreateSummaryResp
+	Code int64 `json:"code"`
 }
 
 type Array struct {

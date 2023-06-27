@@ -16,10 +16,11 @@ type AddFollowResp {
 	Code int64 `json:"code"`
 }
 type RemoveFollowReq {
-	AddFollowReq
+	FollowerId string `json:"followerId"`
+	FolloweeId string `json:"followeeId"`
 }
 type RemoveFollowResp {
-	AddFollowResp
+	Code int64 `json:"code"`
 }
 
 @server(

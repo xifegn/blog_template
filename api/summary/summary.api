@@ -13,16 +13,19 @@ type(
         Code int64 `json:"code"`
     }
     UpdateSummaryReq{
-        CreateSummaryReq
+        UserId     string `json:"username"`
+        Title   string  `json:"title"`
+        Content Array  `json:"content"`
+        IsShared    bool `json:"isShared"`
     }
     UpdateSummaryResp{
-        CreateSummaryResp
+        Code int64 `json:"code"`
     }
     RemoveSummaryReq{
         Username    string `json:"username"`
     }
     RemoveSummaryResp{
-        CreateSummaryResp
+        Code int64 `json:"code"`
     }
 )
 @server (

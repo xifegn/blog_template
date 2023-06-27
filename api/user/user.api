@@ -48,9 +48,10 @@ type (
 	}
 	ModifyAvatarReq {
 		Username string `json:"username"`
+		Avatar   string `json:"avatar"`
 	}
 	ModifyAvatarResp {
-		Avator string `json:"avator"`
+		Code int64 `json:"code"`
 	}
 )
 @server (
