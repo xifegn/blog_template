@@ -1,12 +1,10 @@
 syntax = "v1"
 
-import "../arrays/arrays.api"
-
 type(
     CreateSummaryReq{
         UserId     string `json:"username"`
         Title   string  `json:"title"`
-        Content Array  `json:"content"`
+        Content string  `json:"content"`
         IsShared    bool `json:"isShared"`
     }
     CreateSummaryResp{
@@ -15,7 +13,7 @@ type(
     UpdateSummaryReq{
         UserId     string `json:"username"`
         Title   string  `json:"title"`
-        Content Array  `json:"content"`
+        Content string  `json:"content"`
         IsShared    bool `json:"isShared"`
     }
     UpdateSummaryResp{
