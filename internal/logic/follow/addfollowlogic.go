@@ -24,7 +24,6 @@ func NewAddFollowLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddFoll
 }
 
 func (l *AddFollowLogic) AddFollow(req *types.AddFollowReq) (resp *types.AddFollowResp, err error) {
-	// todo: add your logic here and delete this line
 
 	return
 }

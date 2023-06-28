@@ -9,7 +9,6 @@ import (
 	download "blog_template/internal/handler/download"
 	follow "blog_template/internal/handler/follow"
 	image "blog_template/internal/handler/image"
-	like "blog_template/internal/handler/like"
 	summary "blog_template/internal/handler/summary"
 	user "blog_template/internal/handler/user"
 	"blog_template/internal/svc"
@@ -123,22 +122,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/user/createImage",
 				Handler: image.CreateImageHandler(serverCtx),
-			},
-		},
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/addlike",
-				Handler: like.AddLikeHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/removeLike",
-				Handler: like.RemoveLikeHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

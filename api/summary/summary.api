@@ -2,7 +2,7 @@ syntax = "v1"
 
 type(
     CreateSummaryReq{
-        UserId     string `json:"username"`
+        Username  string `json:"username"`
         Title   string  `json:"title"`
         Content string  `json:"content"`
         IsShared    bool `json:"isShared"`

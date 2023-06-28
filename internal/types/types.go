@@ -115,28 +115,10 @@ type CreateImageResp struct {
 	Code int64 `json:"code"`
 }
 
-type AddLikeReq struct {
-	SummaryId string `json:"summaryId"`
-	UserId    string `json:"userId"`
-}
-
-type AddLikeResp struct {
-	Code int64 `json:"code"`
-}
-
-type RemoveLikedReq struct {
-	SummaryId string `json:"summaryId"`
-	UserId    string `json:"userId"`
-}
-
-type RemoveLikedResp struct {
-	Code int64 `json:"code"`
-}
-
 type CreateSummaryReq struct {
-	UserId   string `json:"username"`
+	Username string `json:"username"`
 	Title    string `json:"title"`
-	Content  Array  `json:"content"`
+	Content  string `json:"content"`
 	IsShared bool   `json:"isShared"`
 }
 
@@ -147,7 +129,7 @@ type CreateSummaryResp struct {
 type UpdateSummaryReq struct {
 	UserId   string `json:"username"`
 	Title    string `json:"title"`
-	Content  Array  `json:"content"`
+	Content  string `json:"content"`
 	IsShared bool   `json:"isShared"`
 }
 
@@ -161,8 +143,4 @@ type RemoveSummaryReq struct {
 
 type RemoveSummaryResp struct {
 	Code int64 `json:"code"`
-}
-
-type Array struct {
-	Array []string `form:"array"`
 }
